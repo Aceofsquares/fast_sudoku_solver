@@ -88,18 +88,14 @@ public class Solver {
                 //Get the result of the next best option in the openCells.  Store if the puzzle
                 //gets solved.
                 solved = solve(puzzle, openCells, getBestOption(openCells, puzzle));
-
-                //If the puzzle is not solved after making guesses, then we made a bad guess
-                //set the position to 0 to retry for the next guess.
-                if(!solved) {
-                    puzzle.put(0, row, col);
-                }
             }
         }
         //If we made guesses for all possible options and we still didn't solve the puzzle then
         //place the cell in the list of openCells.  This will allow the cell to be revisited once
         //a different guess is made for previous cells.
         if(!solved) {
+            //Reset the cell to 0 so previous cells can have a chance at different numbers.
+            puzzle.put(0, row, col);
             openCells.add(cell);
         }
         return solved;
